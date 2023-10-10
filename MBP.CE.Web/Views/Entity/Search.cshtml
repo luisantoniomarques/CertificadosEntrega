@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = Resources.ClientSearch;
+}
+
+<div id="partialView">
+    <div class="page-title clearfix">
+        <div class="col-sm-12">
+            <h1>@Resources.ApplicationName &ndash; @Resources.ClientSearch</h1>
+        </div>
+    </div>
+
+    <div class="body-content">
+        <div class="col-sm-12">
+            <div class="panel-heading"><i class="fa fa-search"></i> @Resources.Search</div>
+            <div class="panel panel-default">
+                <div class="panel-body filters-panel">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6 col-lg-3">
+                            <label for="type" class="col-sm-3">@Resources.Type</label>
+                            <div class="col-sm-9">
+                                @Helpers.BootstrapDropdown("entityType", false, true)
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <label for="name" class="col-sm-3 col-md-2">@Resources.Name</label>
+                            <div class="col-sm-9 col-md-10">
+                                <input type="text" class="width_100p" id="name">
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-md-6 col-lg-3">
+                            <label for="nif" class="col-sm-3">@Resources.NIF</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="width_100p" id="nif">
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>    
+        </div>           
+
+        <div class="col-sm-12 btn-action-group clearfix">
+            <div class="pull-right hidden-xs hidden-sm">
+                <button type="button" class="btn btn-default btn-clear">@Resources.Clear</button>
+                <button type="button" class="btn btn-primary btn-search">@Resources.Search</button>
+            </div>
+            <div class="hidden-md hidden-lg">
+                <button type="button" class="btn btn-default btn-clear">@Resources.Clear</button>
+                <button type="button" class="btn btn-primary btn-search">@Resources.Search</button>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="panel-heading">
+                <i class="fa fa-user"></i> @Resources.Clients
+            </div>
+            <div class="panel results-panel">
+                <form id="form-new-client">
+                    <div class="row">
+                        <div class="col-xs-6 col-md-3 col-lg-2">
+                            @Helpers.BootstrapDropdown("newEntityType", false, true)
+                        </div>
+                        <div class="col-xs-6 col-md-3 col-lg-2">
+                            <button id="newclient" type="button" class="btn btn-default"><i class="fa fa-user-plus"></i> @Resources.NewClient</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div id="panel-client-results"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts { @Scripts.Render("~/bundles/searchEntity") }

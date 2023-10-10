@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>@ViewBag.Title &ndash; @Resources.ApplicationName</title>
+
+    @Styles.Render("~/stylebundles/base")
+    @Styles.Render("~/stylebundles/css")
+    @Styles.Render("~/stylebundles/kendobootstrap")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/handlebars")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/custom")
+    @Scripts.Render("~/bundles/i18n")
+    @Scripts.Render("~/bundles/kendogrid")
+    @Scripts.Render("~/bundles/daterangepicker")
+    @*FontAwesome 5*@
+    <script defer src="https://use.fontawesome.com/releases/v5.1.1/js/all.js"></script>
+
+    @RenderSection("scripts", required: false)
+
+    <base href="@VirtualPathUtility.ToAbsolute("~/")" />
+
+    <script type="text/javascript">
+        SERVICE_URL = "@System.Configuration.ConfigurationManager.AppSettings["ServiceUrl"]";
+    </script>
+
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div id="header" class="col-xs-12">
+                <div class="page-head row">
+                    <div class="col-xs-4 col-sm-3 nopad">
+                        <a href="@System.Configuration.ConfigurationManager.AppSettings["MainPortalURL"]">
+                            <img class="img-responsive logo" alt="Mercedes-Benz" src="~/Content/themes/base/images/MB-a_claim00_M_n_3Cweb.png" />
+                        </a>
+                    </div>
+                    <div class="metanav clearfix">
+                        @Html.Partial("_LoginPartial")
+                    </div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="mobile-burguer hidden-md hidden-lg">
+                            <a id="hamburguersm">
+                                <img src="~/Content/icons/bars.png" alt="icon-menu" />
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+
+
+            @if (Request.IsAuthenticated)
+            //{ Html.RenderAction("List", "MBPMenu", new { userName = PortalActionsHelper.GetUserName(), usage = "rede" }); }
+            { Html.RenderAction("List", "MBPMenu", new { userName = User.Identity.Name, usage = "rede" }); }
+
+
+            @if (!(User.Identity.IsAuthenticated))
+            {
+                <div class="col-sm-4 col-sm-offset-4">
+                    <div class="container-fluid body-content">
+                        @Html.Partial("Modal")
+                        @RenderBody()
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="col-sm-8 col-md-9 col-lg-10 nopad pull-right mcontent">
+                    <div class="container-fluid body-content">
+                        @Html.Partial("Modal")
+                        @RenderBody()
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>
+
+
+

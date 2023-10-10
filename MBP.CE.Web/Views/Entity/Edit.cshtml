@@ -1,0 +1,46 @@
+﻿@if (Request.Url != null && Request.Url.AbsolutePath.IndexOf("entity/edit", StringComparison.Ordinal) >= 0 && string.IsNullOrEmpty(Request["id"]))
+{
+    <div class="alert alert-danger" role="alert">@Resources.InvalidEntityId</div>
+    return;
+}
+
+<form id="form-entity">
+    @switch (Request["type"])
+    {
+        case "291110000":
+            @Html.Partial("Private")
+            break;
+
+        case "291110001":
+        @Html.Partial("Enterprise")
+            break;
+
+        default:
+        <div class="alert alert-danger" role="alert">@Resources.InvalidEntityType</div>
+            return;
+    }
+
+    <input type="hidden" id="contactWarning" name="contactWarning">
+    <input type="hidden" id="addressWarning" name="addressWarning">
+    <input type="hidden" id="cardnameWarning" name="cardnameWarning">
+</form>
+
+@Html.Partial("Address")
+@Html.Partial("Contact")
+
+<div class="row nopad">
+    <div class="col-sm-12 btn-action-group">
+        <div class="text-center hidden-xs hidden-sm">
+            <button type="button" class="btn btn-default float-left btn-goback"><i class="glyphicon glyphicon-share-alt" style="padding-right: 3px; -webkit-transform: rotate(180deg); -moz-transform: rotate(180deg); -ms-transform: rotate(180deg); -o-transform: rotate(180deg); transform: rotate(180deg);"></i> @Resources.GoBack</button>
+            <button type="button" class="btn btn-primary float-right btn-saveEntity"><i class="glyphicon glyphicon-floppy-disk"></i> @Resources.Save</button>
+        </div>
+        <div class="text-center hidden-md hidden-lg">
+            <button type="button" class="btn btn-default float-left btn-goback"><i class="glyphicon glyphicon-share-alt" style="padding-right: 3px; -webkit-transform: rotate(180deg); -moz-transform: rotate(180deg); -ms-transform: rotate(180deg); -o-transform: rotate(180deg); transform: rotate(180deg);"></i> @Resources.GoBack</button>
+            <button type="button" class="btn btn-primary float-right btn-saveEntity"><i class="glyphicon glyphicon-floppy-disk"></i> @Resources.Save</button>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/editEntity")
+}

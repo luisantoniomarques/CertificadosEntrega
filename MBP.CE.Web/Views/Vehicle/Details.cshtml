@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "Vehicle Details";
+}
+
+<div id="vehicle-details"></div>
+
+<script id="vehicle-details-form-template" type="text/x-handlebars-template">
+    <div class="panel-heading"><i class="fa fa-car"></i> @Resources.VehicleDetails</div>
+    <div class="panel panel-default">
+        <div class="panel-body filters-panel">
+            <form id="form-vehicle-details">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                        <label for="typeOfVehicle" class="col-sm-5 text-nowrap">@Resources.TypeOfVehicle</label>
+                        <div class="col-sm-7">
+                            @Helpers.BootstrapDropdown("typeOfVehicle", false, false, false)
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                        <label for="state" class="col-sm-5 text-nowrap">@Resources.State</label>
+                        <div class="col-sm-7">
+                            @Helpers.BootstrapDropdown("state", false, false, false)
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                        <label for="vin" class="col-sm-5 text-nowrap">@Resources.VIN</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="width_100p" id="vin" name="vin" value="{{chassis}}" disabled required>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                        <label for="engineNumber" class="col-sm-5 text-nowrap">@Resources.EngineNo</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="width_100p" id="engineNumber" name="engineNumber" value="{{engine}}" disabled required>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                        <label for="komission" class="col-sm-5 text-nowrap">@Resources.Komission</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="width_100p" id="komission" name="komission" value="{{komission}}" disabled required>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                        <label for="model" class="col-sm-5 text-nowrap">@Resources.Model</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="width_100p" id="model" name="model" value="{{modeldescription}}" disabled required>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                        <label for="license" class="col-sm-5 text-nowrap">@Resources.LicenseNo</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="width_100p" name="license" id="license" value="{{license}}" disabled>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                        <label for="licenseDate" class="col-sm-5 text-nowrap">@Resources.LicenseIssueDate</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="width_100p" name="licenseDate" id="licenseDate" value="{{formatDate licenseIssueDate}}" disabled>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                        <label for="license" class="col-sm-5">Mercedes me connect?</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="width_100p" name="licenseDate" id="licenseDate" value="{{#if meconnect}}Sim{{else}}Não{{/if}}" disabled />
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                        <label for="mercedesproadapterinput" class="col-sm-5" id="mercedesproadapter">Mercedes Pro adapter?</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="width_100p" name="mercedesproadapterinput" id="mercedesproadapterinput" value="{{#if proadapter}}Sim{{else}}Não{{/if}}" disabled />
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                        <label for="mercedesproconnectinput" class="col-sm-5" id="mercedesproconnect">Mercedes Pro connect?</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="width_100p" name="mercedesproconnectinput" id="mercedesproconnectinput" value="{{#if proconnect}}Sim{{else}}Não{{/if}}" disabled />
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</script>

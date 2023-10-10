@@ -1,0 +1,12 @@
+﻿<ul>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <li class="hidden-xs"><img id="user-photo" src="~/Content/images/profile.jpg" alt="photo" width="48" height="48" /></li>
+        <li class="hidden-xs">@User.Identity.Name</li>
+        <li class="sign-out"><a href="@Url.Action("LogOff", "Account")"><i class="fa fa-sign-out-alt" aria-hidden="true"></i></a></li>
+    }
+    else
+    {
+        <li>@Html.ActionLink(@Resources.SignInTop, "Login", "Account")</li>
+    }
+</ul>

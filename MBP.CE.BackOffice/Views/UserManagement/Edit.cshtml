@@ -1,0 +1,39 @@
+﻿@model UserViewModel
+
+<h1>Editar utilizador: @Model.Username</h1>
+
+@if (TempData["CannotResetPassword"] != null && Convert.ToBoolean(TempData["CannotResetPassword"]))
+{
+    <div class="alert alert-danger">
+        <strong>Erro!</strong> Não foi possível fazer reset da password.
+    </div>
+}
+
+@if (TempData["CannotSendEmail"] != null && Convert.ToBoolean(TempData["CannotSendEmail"]))
+{
+    <div class="alert alert-warning">
+        <strong>Atenção!</strong> Foi feito o reset da password, mas não foi possível notificar o utilizador por email.
+    </div>
+}
+
+@using (Html.BeginForm("Edit", "UserManagement", FormMethod.Post))
+{
+    @Html.ValidationSummary()
+
+    if (TempData["PasswordReseted"] != null && Convert.ToBoolean(TempData["PasswordReseted"])) {
+        <div class="alert alert-success">
+            Foi enviado um email para <strong>@Model.Email</strong> com a nova password.
+        </div>
+    }
+
+    @Html.Partial("UserFormTemplate", Model)
+
+    <br />
+    <input type="submit" value="Guardar alterações" />
+    @Html.ActionLink("Voltar", "Index", "UserManagement", new { style = "margin-left: 10px;" })
+    @Html.ActionLink("Reset Password", "ResetPassword", "UserManagement", new { username = Model.Username, email = Model.Email }, new { style = "margin-left: 50px;" })
+}
+
+@section scripts {
+    <script src="~/Scripts/UserManagement/userManagement.js"></script>
+}

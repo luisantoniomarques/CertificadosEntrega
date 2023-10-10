@@ -1,0 +1,168 @@
+﻿@{
+    ViewBag.Title = "New Certificate - Step 2";
+}
+
+<style>
+    .withoutnif {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+
+    .owner-visibility, .lessor-visibility, .lessee-visibility {
+        display: none !important;
+    }
+
+    #generate-client-body ul li {
+        cursor: pointer;
+        padding: 5px;
+    }
+
+    #generate-client-body ul li:hover {
+        cursor: pointer;
+        background-color: #CCC;
+    }
+
+    .relative {
+        position: relative !important;
+    }
+</style>
+
+<form id="form-new-cert-step2">
+    
+    <div id="certificateDeliveryTypes"></div>
+
+    <div class="col-sm-12 btn-action-group nopad margin-bottom-15 margin-top-10">
+        <div class="hidden-xs hidden-sm text-center">
+            <button type="button" class="btn btn-default float-left btn-goback">@Resources.Previous</button>
+            <button type="button" class="btn btn-default btn-clear">@Resources.Clear</button>
+            <button type="button" class="btn btn-primary float-right btn-next">@Resources.Continue</button>
+        </div>
+        <div class="hidden-md hidden-lg text-center">
+            <button type="button" class="btn btn-default float-left btn-goback">@Resources.Previous</button>
+            <button type="button" class="btn btn-default btn-clear">@Resources.Clear</button>
+            <button type="button" class="btn btn-primary float-right btn-next">@Resources.Continue</button>
+        </div>
+    </div>
+</form>
+
+<script id="usage-form-template" type="text/x-handlebars-template">
+    <div id="panel-{{usage}}">
+        <div class="panel-heading margin-top-15"><i class="fa fa-user"></i> {{title}}</div>
+                <div class="panel panel-default">
+                    <div class="panel-body" id="panel-body-{{usage}}">
+
+                        <div class="row">
+                            <div class="col-12">
+                                <button id="CreateClientWithoutNif" type="button" class="btn btn-default withoutnif {{usage}}-visibility" role="button" data-usage="{{usage}}" data-without-taxid="true">Não tenho NIF</button>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <label for="taxid" class="control-label col-xs-12 col-sm-3 required">@Resources.NIPC</label>
+                                <div class="col-xs-4 col-md-5 col-lg-3">
+                                    <input type="text" class="width_100p" name="{{usage}}taxid" id="{{usage}}taxid" value="{{taxid}}" data-usage="{{usage}}" {{#if fakeTaxId}} disabled {{else}} enabled {{/if}} required />
+                                    <input type="hidden" data-usage="{{usage}}" id="{{usage}}guid" value="{{id}}" />
+                                    <input type="hidden" id="{{usage}}type" value="{{type}}" />
+                                </div>
+                                <div class="col-sm-3">
+                                    {{#if taxid}} {{#unless id}}
+                                    <button id="{{usage}}CreateClient" data-new-client="true" data-usage="{{usage}}" type="button" class="btn btn-default" role="button"><i class="fa fa-user-plus"></i> @Resources.CreateClient</button>
+                                    {{/unless}}{{/if}}
+                                    {{#if id}}
+                                    <button id="{{usage}}EditClient" data-edit-client="true" data-usage="{{usage}}" type="button" class="btn btn-default" role="button"><i class="fa fa-user-edit"></i> @Resources.EditClient</button>
+                                    {{/if}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <label for="name" class="control-label col-sm-3 required">@Resources.Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="width_100p" name="{{usage}}name" id="{{usage}}name" value="{{fullname}}" data-fullname="{{usage}}" {{#if fakeTaxId}} enabled {{else}} disabled {{/if}} required />
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-6">
+                                <label class="control-label col-sm-3 required" for="{{usage}}address">@Resources.Address</label>
+                                <div class="col-sm-9">
+                                    @Helpers.BootstrapDropdown("{{usage}}address", false, true)
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-6">
+                                <label for="phone" class="control-label col-sm-3 required text-nowrap">@Resources.Phone</label>
+                                <div class="col-sm-9">
+                                    @Helpers.BootstrapDropdown("{{usage}}phone", false, true)
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-6">
+                                <label for="email "class="control-label col-sm-3 required">@Resources.Email</label>
+                                <div class="col-sm-9">
+                                    @Helpers.BootstrapDropdown("{{usage}}email", false, true)
+                                </div>
+                            </div>
+                        </div>
+
+                        @*{{#if needDataAuthorization}}
+                            <div style="margin-top:25px;">
+                                <div class="form-group">
+                                    <div class="col-md-10" style="padding: 7px 0px 0px;">
+                                        <p class="control-label">O cliente autoriza que os dados fornecidos possam ser usados, pela Mercedes-Benz Portugal e a sua rede de concessionários, para ações de Marketing?</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="control-label"><input type="radio" class="radio-inline" name="{{usage}}authorizeMBP" value="true" required /> <label>@Resources.Yes</label></label>&nbsp;
+                                        <label class="control-label"><input type="radio" class="radio-inline" name="{{usage}}authorizeMBP" value="false" /> <label>@Resources.No</label></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-10" style="padding: 7px 0px 0px;">
+                                        <p class="control-label">O cliente autoriza que os dados fornecidos possam ser usados, pelas empresas do Grupo Daimler AG no espaço da União Europeia, para ações de Marketing?</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="control-label"><input type="radio" class="radio-inline" name="{{usage}}authorizeDaimler" value="true" required /> <label>@Resources.Yes</label></label>&nbsp;
+                                        <label class="control-label"><input type="radio" class="radio-inline" name="{{usage}}authorizeDaimler" value="false" /> <label>@Resources.No</label></label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-10" style="padding: 7px 0px 0px;">
+                                        <p class="control-label">O cliente autoriza que os dados sejam processados e utilizados pela Mercedes-Benz Portugal e pela sua rede de concessionários para efeitos de prestação de serviços de assistência técnica, bem como empresas contratadas pela Mercedes-Benz Portugal, no âmbito da prestação dos referidos serviços?</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="control-label"><input type="radio" class="radio-inline" name="{{usage}}ASauthorizeMBP" value="true" required /> <label>@Resources.Yes</label></label>&nbsp;
+                                        <label class="control-label"><input type="radio" class="radio-inline" name="{{usage}}ASauthorizeMBP" value="false" /> <label>@Resources.No</label></label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-10" style="padding: 7px 0px 0px;">
+                                        <p class="control-label">O cliente autoriza que os dados sejam cedidos às empresas do GRUPO DAIMLER para efeitos de prestação de assistência técnica?</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="control-label"><input type="radio" class="radio-inline" name="{{usage}}ASauthorizeDaimler" value="true" required /> <label>@Resources.Yes</label></label>&nbsp;
+                                        <label class="control-label"><input type="radio" class="radio-inline" name="{{usage}}ASauthorizeDaimler" value="false" /> <label>@Resources.No</label></label>
+                                    </div>
+                                </div>
+
+                            </div>
+                    {{/if}}*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="fake-client-list-template" type="text/x-handlebars-template">
+    <h1 style="font-size: 15px; line-height: 0;">A pessoa é alguma das referidas abaixo?</h1>
+    <ul data-usage="{{usage}}">
+        {{#each people}}
+        <li data-taxid="{{taxid}}">{{fullname}}</li>
+        {{else}}
+        <li>Sem registos para apresentar</li>
+        {{/each}}
+    </ul>
+    
+    <button type="button" class="btn btn-default" style="width: 150px; margin: 20px;" role="button" data-usage="{{usage}}" data-without-taxid="true">Não, criar uma nova</button>
+</script>

@@ -1,0 +1,73 @@
+﻿<div class="panel-heading"><i class="fa fa-search"></i> @Resources.Search</div>
+<div class="panel panel-default">
+    <div class="panel-body filters-panel">
+        <div class="row">
+            <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                <label for="type" class="col-sm-5 text-nowrap">@Resources.Type</label>
+                <div class="col-sm-7">
+                    @Helpers.BootstrapDropdown("type", false, false)
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                <label for="state" class="col-sm-5 text-nowrap">@Resources.State</label>
+                <div class="col-sm-7">
+                    @Helpers.BootstrapDropdown("state", false, false, multiple: !(Request != null && Request.Url != null && Request.Url.AbsolutePath.IndexOf("correction", StringComparison.CurrentCultureIgnoreCase) > 0))
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                <label for="vin" class="col-sm-5 text-nowrap">@Resources.VIN</label>
+                <div class="col-sm-7">
+                    <input type="text" class="width_100p" id="vin">
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                <label for="engine" class="col-sm-5 text-nowrap">@Resources.EngineNo</label>
+                <div class="col-sm-7">
+                    <input type="text" class="width_100p" id="engine">
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                <label for="komission" class="col-sm-5 text-nowrap">@Resources.Komission</label>
+                <div class="col-sm-7">
+                    <input type="text" class="width_100p" id="komission">
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                <label for="model" class="col-sm-5 text-nowrap">@Resources.Model</label>
+                <div class="col-sm-7">
+                    <input type="text" class="width_100p" id="model">
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                <label for="license" class="col-sm-5 text-nowrap">@Resources.LicenseNo</label>
+                <div class="col-sm-7">
+                    <input type="text" class="width_100p" id="license">
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                <label for="outlet" class="col-sm-5 text-nowrap">@Resources.Outlet</label>
+                <div class="col-sm-7">
+                    @Helpers.BootstrapDropdown("outlet", false, false)
+                </div>
+            </div>
+
+            @if (ViewBag.ShowCertificateTypeFilter == true)
+            {
+
+                <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                    <label for="certificateType" class="col-sm-5 text-nowrap">@Resources.CertificateType</label>
+                    <div class="col-sm-7">
+                        @Helpers.BootstrapDropdown("certificateType", false, false)
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

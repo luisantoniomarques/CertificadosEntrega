@@ -1,0 +1,35 @@
+﻿<div id="partialView">
+    <div class="page-title clearfix">
+        <div class="col-sm-12">
+            <h1>@Resources.ApplicationName &ndash; Editar Certificado</h1>
+        </div>
+    </div>
+    <div class="body-content">
+        <div id="vehicle-details" class="col-sm-12">
+
+            @Html.Partial("../Vehicle/Details")
+
+        </div>
+
+        <div class="col-sm-12">
+            <ul class="nav nav-tabs hidden">
+                <li class="active"><a data-toggle="tab" href="#step1">Step 1</a></li>
+                <li><a data-toggle="tab" href="#step2">Step 2</a></li>
+                <li><a data-toggle="tab" href="#step3">Step 3</a></li>
+            </ul>
+            <div class="tab-content nopad" style="border: none !important">
+                
+                    @Html.Partial("Step1")
+               
+                <div id="step2" class="tab-pane fade" style="padding: 0 !important">
+                    @Html.Partial("Step2")
+                </div>
+                <div id="step3" class="tab-pane fade" style="padding: 0 !important">
+                    @Html.Partial("Step3")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts { @Scripts.Render("~/bundles/editCertificate") }

@@ -1,0 +1,11 @@
+﻿
+th.k-header {
+    font-weight: bold !important;
+    text-decoration: none !important;
+}
+
+.k-detail-cell .k-header {
+    background-color: #999 !important;
+    color: #FFF !important;
+    font-weight: bold !important;
+}

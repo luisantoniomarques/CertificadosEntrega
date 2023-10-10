@@ -1,0 +1,185 @@
+﻿{
+    "certificate": {
+
+        "deliveryType": {
+            "WithoutLicense": "Sem matrícula",
+            "DE": "[DE] Demonstração",
+            "SE": "[SE] Serviço",
+            "PP": "[PP] Particular - Uso Próprio",
+            "PT": "[PT] Particular - Uso de Terceiros",
+            "E": "[E] Empresa",
+            "ELR_PP": "[ELR-PP] Particular - Uso Próprio",
+            "ELR_PT": "[ELR-PT] Particular - Uso de Terceiros",
+            "ELR_E": "[ELR-E] Empresa",
+            "F": "[F] Frotas",
+            "RAC": "[RAC] Rent-a-car",
+            "RC": "[RC] Renting Colaborador",
+
+            "title": {
+                "owner": "Dados do Proprietário",
+                "user": "Dados do Utilizador",
+                "lessor": "Dados da Locadora",
+                "lessee": "Dados do Locatário",
+                "contact": "Dados da Pessoa de Contacto",
+                "ownerUser": "Dados do Proprietário e Utilizador",
+                "lesseeUser": "Dados do Locatário e Utilizador"
+            }
+        },
+
+        "action": {
+            "view": "Visualizar",
+            "correct": "Corrigir",
+            "issue": "Emitir",
+            "reassign": "Ceder",
+            "continue": "Continuar",
+            "edit": "Editar",
+            "close": "Terminar",
+            "cancel": "Anular"
+        },
+
+        "cancelConfirmation": "Confirma a anulação do certificado {0} com data de entrega a {1}?",
+        "cancelConfirmationSuccess": "Certificado anulado com sucesso.",
+        "cancelConfirmationFailed": "Não é possível anular este certificado.",
+
+        "type": {
+            "new": "Novo",
+            "starSelection": "StarSelection"
+        },
+
+        "status": {
+            "archived": "Arquivado",
+            "available": "Disponível",
+            "assigned": "Atribuído",
+            "delivered": "Entregue",
+            "closed": "Terminado",
+
+            "291110000": "Arquivado",
+            "291110002": "Atribuído",
+            "291110001": "Disponível",
+            "291110003": "Entregue",
+            "291110007": "Terminado"
+        },
+
+        "create": {
+            "starselection": "StarSelection",
+            "used": "Usado",
+            "used1": "Used1",
+            "nolicense": "Sem matrícula",
+            "new": "Novo",
+
+            "291110000": "StarSelection",
+            "291110001": "Usado",
+            "291110002": "Used1",
+            "291110003": "Sem matrícula",
+            "291110004": "Novo",
+            "null":      ""
+        },
+
+        "atLeastOneContact": "Selecione, pelo menos, um contacto telefónico e um email.",
+
+        "deliveryDateGreaterOrEqualThanLicenseDate": "A data de entrega tem que ser igual ou superior à data da matrícula.",
+
+        "warrantyEndDateGreaterThanWarrantyStartDate": "A data de fim da garantia tem que ser igual ou superior à data de início da garantia.",
+
+        "confirmDeliveryDateLessThanLicenseDate": "Confirma que a data de entrega é anterior à data da matrícula?",
+
+        "doesNotHaveSearchPermissions": "Não tem permissões para fazer esta pesquisa.",
+
+        "onlyOneNewCertificate": "A viatura já tem um certificado novo emitido. Não é possível emitir dois certificados novos para a mesma viatura.",
+
+        "all": "Todos"
+    },
+
+    "correctionRequest": {
+        "status": {
+            "pending": "Pendente",
+            "rejected": "Rejeitado",
+            "processed": "Aprovado",
+
+            "1": "Pendente",
+            "291110000": "Pendente",
+            "291110001": "Rejeitado",
+            "291110002": "Aprovado"
+        },
+
+        "type": {
+            "dataClean": "Limpeza de dados"
+        }
+    },
+
+    "entity": {
+        "removeAddress": "Tem a certeza que pretende remover a morada seleccionada?",
+        "removeContact": "Tem a certeza que pretende remover o contacto seleccionado?",
+        "atLeastOneContact": "Insira, pelo menos, um telefone e um email.",
+        "atLeastOneAddress": "Insira, pelo menos, uma morada.",
+        "cardNameSizeExceeded": "O nome do cartão excede o tamanho máximo para impressão.",
+		"cardNameInvalid": "O nome do cartão é invalido.",
+        "duplicatedTin": "NIF já existe",
+        "invalidTin": "NIF inválido",
+        "onlyPrivateNif": "Só são permitidos NIF de particulares",
+        "onlyEnterpriseNif": "Só são permitidos NIF de empresas",
+        "oneEmailAndOnePhone": "Deve indicar obrigatoriamente um telefone e um email",
+        "invalidPortuguesePostalCode": "O código postal não é válido para Portugal",
+
+        "type": {
+            "291110000": "Individual",
+            "291110001": "Empresa"
+        }
+    },
+
+    "vehicle": {
+        "financingPeriod": {
+            "12months": "12 Meses",
+            "24months": "24 Meses",
+            "36months": "36 Meses",
+            "48months": "48 Meses",
+            "60months": "60 Meses",
+            "72months": "72 Meses",
+            "84months": "84 Meses",
+            "96months": "96 Meses",
+            "108months": "108 Meses",
+            "120months": "120 Meses",
+            "unknown": "Desconhecido"
+        },
+
+        "invalidBaumuster": "Baumuster inválido.",
+        "invalidStarSelectionMileage": "Quilometragem StarSelection inválida.",
+        "invalidStarSelectionDate": "Data StarSelection inválida.",
+        "invalidKomissionStarSelection": "Nº encomenda inválido para StarSelection",
+        "invalidKomission": "Nº encomenda inválido",
+        "invalidKomissionSize": "Nº Encomenda (kommision) tem 10 dígitos",
+        "invalidEngineSize": "Nº Motor tem, pelo menos, 10 dígitos",
+        "invalidVINSize": "Nº Chassis tem 17 dígitos",
+
+        "type": {
+            "new": "Novo",
+            "used": "Usado"
+        },
+
+        "status": {
+            "291110000": "Novo",
+            "291110001": "Usado",
+            "teste": "teste"
+        }
+    },
+
+    "jQuery": {
+        "validator": {
+            "required": "Campo de preenchimento obrigatório.",
+            "email": "Indique um email válido.",
+            "url": "Indique um URL válido.",
+            "date": "Formato de data inválido.",
+            "dateISO": "Formato de data inválido (ISO).",
+            "number": "Valor não numérico.",
+            "digits": "Introduza apenas números.",
+            "daymonthyearfour": "Indique a data no formato dd-mm-aaaa.",
+            "greaterThanZero": "Valor tem que ser superior a zero",
+            "invalidValue": "Valor inválido"
+        }
+    },
+
+    "general": {
+        "true": "Sim",
+        "false":  "Não"
+    }
+}

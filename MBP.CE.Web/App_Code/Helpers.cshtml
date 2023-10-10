@@ -1,0 +1,80 @@
+﻿@helper BootstrapDropdown(string id, bool enableSearch, bool required, bool enabled = true, string cssClasses = null, bool multiple = false, int maxMultipleItems = 3)
+{
+    <select class="btn-group-sm selectpicker show-tick @cssClasses"
+            data-width="100%"
+            id="@id"
+            name="@id"
+            title=""
+            data-live-search="@enableSearch.ToString().ToLower()"
+            @(required ? "required aria-required='true'" : "")
+            @(enabled ? "" : "disabled")
+            @(multiple ? "multiple data-selected-text-format=count>" + maxMultipleItems : "")
+    ></select>
+}
+
+@helper Pager(string functionName)
+{
+    <div class="pager-mbp" data-current-page="{{CurrentPage}}" data-function="@functionName">
+        {{#if this.Records}}
+        <span class="first" data-previous-page-to="{{CurrentPage}}"><</span>
+
+        {{#ifGreaterThan PageCount 4}}
+        <span data-page="{{CurrentPage}}" class="pager-mbp-current">{{sum CurrentPage 1}}</span> /
+        <span data-page="{{sum PageCount -1}}" class="{{#ifCond CurrentPage PageCount}}pager-mbp-current{{/ifCond}}">{{PageCount}}</span>
+
+        {{else}}
+
+        {{#ifGreaterThan PageCount 0}}
+        <span data-page="0" class="{{#ifCond CurrentPage 0}}pager-mbp-current{{/ifCond}}">1</span>
+        {{/ifGreaterThan}}
+
+        {{#ifGreaterThan PageCount 1}}
+        <label> / </label>
+        <span data-page="1" class="{{#ifCond CurrentPage 1}}pager-mbp-current{{/ifCond}}">2</span>
+        {{/ifGreaterThan}}
+
+        {{#ifGreaterThan PageCount 2}}
+        <label> / </label>
+        <span data-page="2" class="{{#ifCond CurrentPage 2}}pager-mbp-current{{/ifCond}}">3</span>
+        {{/ifGreaterThan}}
+
+        {{#ifGreaterThan PageCount 3}}
+        <label> / </label>
+        <span data-page="3" class="{{#ifCond CurrentPage 3}}pager-mbp-current{{/ifCond}}">4</span>
+        {{/ifGreaterThan}}
+
+        {{/ifGreaterThan}}
+
+        <span class="last" data-max-page="{{PageCount}}" data-next-page-to="{{CurrentPage}}">></span>
+        {{/if}}
+    </div>
+}
+
+@helper PagerItems(string id, string function)
+{
+    <select class="btn-group-sm selectpicker show-tick" data-pager-item="true" data-function="@function" data-width="55px" id="@id" name="@id">
+        {{#ifCond NumberOfItemsPerPage 5}}
+        <option selected="selected">5</option>
+        {{else}}
+        <option>5</option>
+        {{/ifCond}}
+        
+        {{#ifCond NumberOfItemsPerPage 10}}
+        <option selected="selected">10</option>
+        {{else}}
+        <option>10</option>
+        {{/ifCond}}
+        
+        {{#ifCond NumberOfItemsPerPage 25}}
+        <option selected="selected">25</option>
+        {{else}}
+        <option>25</option>
+        {{/ifCond}}
+
+        {{#ifCond NumberOfItemsPerPage 50}}
+        <option selected="selected">50</option>
+        {{else}}
+        <option>50</option>
+        {{/ifCond}}
+    </select>
+}

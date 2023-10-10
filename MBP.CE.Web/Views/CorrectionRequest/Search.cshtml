@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = @Resources.CorrectionRequests;
+}
+
+<div id="partialView">
+    <div class="page-title clearfix">
+        <div class="col-sm-12">
+            <h1>@Resources.ApplicationName &ndash; @Resources.CorrectionRequests</h1>
+        </div>
+    </div>
+    <div class="body-content">
+        <div class="col-sm-12">
+            @Html.Partial("FilterBox")
+        </div>
+
+        <div class="col-sm-12 btn-action-group clearfix">
+            <div class="pull-right hidden-xs hidden-sm">
+                <button type="button" class="btn btn-default btn-clear">@Resources.Clear</button>
+                <button type="button" class="btn btn-primary btn-search">@Resources.Search</button>
+            </div>
+            <div class="hidden-md hidden-lg">
+                <button type="button" class="btn btn-default btn-clear">@Resources.Clear</button>
+                <button type="button" class="btn btn-primary btn-search">@Resources.Search</button>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="panel-heading">
+                <i class="fa fa-edit"></i> Resultado da Pesquisa
+            </div>
+            <div class="panel results-panel">
+                <div class="row">
+                    <div id="panel-corrections-results"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/searchCorrectionRequest")
+}

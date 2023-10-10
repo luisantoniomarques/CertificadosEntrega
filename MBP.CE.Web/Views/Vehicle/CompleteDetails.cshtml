@@ -1,0 +1,145 @@
+﻿<form id="form-complete-details">
+    <div class="panel-heading"><i class="fa fa-edit"></i> Submeter pedido</div>
+    <div class="panel panel-default">
+        <div class="panel-body filters-panel">
+            <div class="row">
+                <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                    <label for="type" class="col-sm-5 text-nowrap required">@Resources.LicenseType</label>
+                    <div class="col-sm-7">
+                        @Helpers.BootstrapDropdown("licenseType", false, true)
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                    <label for="details-licenseIssueDate" class="col-sm-5 text-nowrap required">@Resources.LicenseIssueDate</label>
+                    <div class="col-sm-7">
+                        <div class="datepicker-wrapper">
+                            <input type="text" class="width_100p datepicker" id="details-licenseIssueDate" name="details-licenseIssueDate" disabled>
+                            <span><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                    <label for="details-license" class="col-sm-5 text-nowrap required">@Resources.LicenseNo</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="width_100p" id="details-license" name="details-license" disabled required>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                    <label for="warrantyStartDateUsed" class="col-sm-5 vehicleUsed required" style="display: none; margin-bottom: 10px">@Resources.WarrantyStartDate</label>
+                    <label for="warrantyEndDate" class="col-sm-5 text-nowrap required">@Resources.WarrantyEndDate</label>
+                    <div class="col-sm-7">
+                        <div class="datepicker-wrapper">
+                            <input type="text" class="width_100p datepicker row-margin-bottom vehicleUsed" id="warrantyStartDateUsed" name="warrantyStartDateUsed" style="display: none" required>
+                            <input type="text" class="width_100p datepicker" id="warrantyEndDate" name="warrantyEndDate" disabled required>
+                            <span><i class="glyphicon glyphicon-calendar"></i></span>
+                            <input type="hidden" class="datepicker" id="warrantyStartDate" value="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                    <label for="deliveryDate" class="col-sm-5 text-nowrap required">@Resources.DeliveryDate</label>
+                    <div class="col-sm-7">
+                        <div class="datepicker-wrapper">
+                            <input type="text" class="width_100p datepicker" id="deliveryDate" name="deliveryDate" required date>
+                            <span><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                    <label for="transportType" class="col-sm-5 text-nowrap required">@Resources.TransportType</label>
+                    <div class="col-sm-7">
+                        @Helpers.BootstrapDropdown("transportType", false, true)
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4" id="paymentTypeGroup">
+                    <label for="paymentType" class="col-sm-5 required">@Resources.PaymentType</label>
+                    <div class="col-sm-7">
+                        @Helpers.BootstrapDropdown("paymentType", false, true)
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4" id="financingGroup">
+                    <label for="financing" class="col-sm-5 required">@Resources.Financing</label>
+                    <div class="col-sm-7">
+                        @Helpers.BootstrapDropdown("financing", false, true)
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4" id="specialUseGroup">
+                    <label for="specialUse" class="col-sm-5 text-nowrap required">@Resources.SpecialUse</label>
+                    <div class="col-sm-7">
+                        @Helpers.BootstrapDropdown("specialUse", false, false)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4">
+                    <label for="buyAndDeliveryQuestion" class="col-sm-12">@Resources.BuyAndDeliveryQuestion</label>
+                    <div class="form-group radio-inline col-sm-12">
+                        <input type="radio" id="buyAndDeliveryQuestion-yes" name="buyAndDeliveryQuestion" value="true"><label for="buyAndDeliveryQuestion-yes">@Resources.Yes</label>
+                        <input type="radio" id="buyAndDeliveryQuestion-no" name="buyAndDeliveryQuestion" value="false"><label for="buyAndDeliveryQuestion-no">@Resources.No</label>
+                    </div>
+                </div>
+            
+                <div class="col-xs-6 col-lg-4" id="numberKeyGroup">
+                    <label for="keys" class="col-sm-12 required">@Resources.NumberOfKeys</label>
+                    <div class="col-sm-12">
+                        <input type="text" class="width_100p" id="details-numberOfKeys" name="details-numberOfKeys" onkeypress="return isNumberKey(event)" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-6 col-lg-4" id="mileageGroup">
+                    <label for="mileage" class="col-sm-12 required" id="mileagess">@Resources.MileageStarSelection</label>
+                    <label for="mileage" class="col-sm-12 required" id="mileagemb">@Resources.MileageMBCertified</label>
+                    <label for="mileage" class="col-sm-12 required" id="mileageu1">@Resources.MileageUsed1</label>
+                    <div class="col-sm-12">
+                        <input type="text" class="width_100p" id="mileage" name="mileage" required>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-lg-4" id="ssCardNameGroup">
+                    <label for="ssCardName" class="col-sm-12 required" id="sscardnamess">@Resources.CardName</label>
+                    <label for="ssCardName" class="col-sm-12 required" id="sscardnamemb">@Resources.CardNameMB</label>
+                    <label for="ssCardName" class="col-sm-12 required text-nowrap" id="sscardnameu1">@Resources.CardNameUsed1</label>
+                    <div class="col-sm-12">
+                        <input type="text" class="width_100p" id="ssCardName" name="ssCardName" required>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4" id="certificateMeConnectGroup">
+                    <label for="certificateMeConnect" class="col-sm-12">Mercedes me connect ativo?</label>
+                    <div class="form-group radio-inline col-sm-12">
+                        <input type="radio" id="certificateMeConnectY" name="certificateMeConnect" value="true"><label for="certificateMeConnectY">@Resources.Yes</label>
+                        <input type="radio" id="certificateMeConnectN" name="certificateMeConnect" value="false"><label for="certificateMeConnectN">@Resources.No</label>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4" id="certificateProAdapterGroup">
+                    <label for="certProAdapter" class="col-sm-12 required text-nowrap" id="certmercedesproadapter">Mercedes Pro adapter ativo?</label>
+                    <div class="form-group radio-inline col-sm-12" id="certProAdapterOptions">
+                        <input type="radio" id="certProAdapterY" name="certProAdapter" value="true"><label for="certProAdapterY" id="lblCertProAdapterY">@Resources.Yes</label>
+                        <input type="radio" id="certProAdapterN" name="certProAdapter" value="false"><label for="certProAdapterN" id="lblCertProAdapterN">@Resources.No</label>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4" id="certificateProConnectGroup">
+                    <label for="certProConnect" class="col-sm-12 required text-nowrap" id="certmercedesproconnect">Mercedes Pro connect ativo?</label>
+                    <div class="form-group radio-inline col-sm-12" id="certProConnectOptions">
+                        <input type="radio" id="certProConnectY" name="certProConnect" value="true"><label for="certProConnectY" id="lblCertProConnectY">@Resources.Yes</label>
+                        <input type="radio" id="certProConnectN" name="certProConnect" value="false"><label for="certProConnectN" id="lblCertProConnectN">@Resources.No</label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,29 @@
+﻿
+.k-link {
+    border: 0 !important;
+    color: #666 !important;
+    background-color: transparent !important;
+    outline: 0 !important;
+}
+
+.k-link:hover {
+	color: #00adef !important;
+}
+
+/*.k-pager-numbers li::after { 
+    content: "/" !important;
+}*/
+
+.k-pager-numbers li:last-child::after { 
+    content: "" !important;
+}
+
+.k-state-selected {
+    background-color: #3379b5 !important;
+    border: 0 !important;
+    color: white !important;
+}
+
+.k-loading-mask {
+    display: none !important;
+}

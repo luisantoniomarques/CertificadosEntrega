@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gestão de Utilizadores - Certificados de Entrega v2.0</title>
+
+    @Styles.Render("~/Content/base")
+    @Styles.Render("~/Content/css")
+    
+    <script type="text/javascript">
+        SERVICE_URL = "@System.Configuration.ConfigurationManager.AppSettings["ServiceUrl"]";
+    </script>
+
+</head>
+<body>
+    <div class="wrapper">
+        <div class="page-head row">
+            <div class="col-md-6 col-xs-12 nopad">
+                <a href="/">
+                    <img class="img-responsive logo" alt="Mercedes-Benz" src="~/Content/themes/base/images/MB-a_claim00_M_n_3Cweb.png" />
+                </a>
+            </div>
+            <div class="col-md-6 col-xs-12 metanav">
+                
+            </div>
+        </div>
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu_items" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="menu_items">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Gestão Utilizadores", "Index", "UserManagement")</li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+        <div class="container-fluid body-content">
+        
+            @Html.Partial("Modal")
+
+            @RenderBody()
+
+        </div>
+
+        <div class="text-right foot">
+            <p>&copy; @DateTime.Now.Year - Mercedes-Benz Portugal</p>
+        </div>
+
+    </div>
+    
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/handlebars")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/custom")
+    @Scripts.Render("~/bundles/i18n")
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

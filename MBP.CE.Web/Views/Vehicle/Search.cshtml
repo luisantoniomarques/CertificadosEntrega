@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = Resources.VehicleSearch;
+}
+
+<style>
+    .noresult td {
+        width: 100px;
+        height: 20px;
+        white-space: nowrap;
+    }
+</style>
+
+<div id="partialView">
+    <div class="page-title clearfix">
+        <div class="col-sm-12">
+            <h1>@Resources.ApplicationName &ndash; @Resources.VehicleSearch</h1>
+        </div>
+    </div>
+    <div class="body-content">
+        <div class="col-sm-12">
+            @Html.Partial("FilterBox")
+
+        </div>
+        <div class="col-sm-12 btn-action-group clearfix">
+            <div class="pull-right hidden-xs hidden-sm">
+                <button type="button" class="btn btn-default btn-clear">@Resources.Clear</button>
+                <button type="button" class="btn btn-primary btn-search">@Resources.Search</button>
+            </div>
+            <div class="hidden-md hidden-lg">
+                <button type="button" class="btn btn-default btn-clear">@Resources.Clear</button>
+                <button type="button" class="btn btn-primary btn-search">@Resources.Search</button>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="panel-heading">
+                <i class="fa fa-edit"></i> Resultado da Pesquisa
+            </div>
+            <div class="panel results-panel">
+                <div class="row">
+                    <div class="export-btn-group">
+                        <button id="newvehicle" type="button" class="btn btn-default btn-sm" style="display: none;"><i class="fa fa-car"></i> @Resources.SearchVehicle</button>
+                    </div>
+                </div>
+                <div class="row">                
+                    <div id="panel-vehicles-results"></div>
+                    <div id="panel-vehicles-noresults"></div>
+                    <script id="vehicles-noresults-template" type="text/x-handlebars-template">
+                        {{#if zeroRecords}}
+                        {{#if data.belongsToUserConcession}}
+                        <div style="margin: 15px" class="alert alert-warning" role="alert">
+                            <p>O veículo com o chassis <b>{{data.chassis}}</b> está atribuído a <b>{{data.outletname}}</b>.</p>
+                            <p>Deverá contactar o colega da {{data.outletname}} para que este lhe faça a cedência do veículo.</p>
+                        </div>
+                        {{else}}
+                        <div style="margin: 15px" class="alert alert-info" role="alert">
+                            <span>Não existem resultados para a pesquisa com os critérios especificados</span>
+                            <table class="noresult">
+                                {{#if search.vehicleStatus}}
+                                <tr><td>@Resources.Type: </td><td><b>{{comboTextByValue 'type' search.vehicleStatus}}</b></td></tr>{{/if}}
+                                {{#if search.certstatus}}
+                                <tr><td>@Resources.State: </td><td><b>{{comboTextByValue 'state' search.certstatus}}</b></td></tr>{{/if}}
+                                {{#if search.chassis}}
+                                <tr><td>@Resources.VIN: </td><td><b>{{search.chassis}}</b></td></tr>{{/if}}
+                                {{#if search.engine}}
+                                <tr><td>@Resources.EngineNo: </td><td><b>{{search.engine}}</b></tr>{{/if}}
+                                {{#if search.comission}}
+                                <tr><td>@Resources.Komission: </td><td><b>{{search.comission}}</b></tr>{{/if}}
+                                {{#if search.model}}
+                                <tr><td>@Resources.Model: </td><td><b>{{search.model}}</b></tr>{{/if}}
+                                {{#if search.license}}
+                                <tr><td>@Resources.LicenseNo: </td><td><b>{{search.license}}</b></tr>{{/if}}
+                                {{#if search.outlet}}
+                                <tr><td>@Resources.Outlet: </td><td><b>{{comboTextByValue 'outlet' search.outlet}}</b></tr>{{/if}}
+                                {{#if search.certificateType}}
+                                <tr><td>@Resources.CertificateType: </td><td><b>{{comboTextByValue 'certificateType' search.certificateType}}</b></tr>{{/if}}
+                            </table>
+                        </div>
+                        {{/if}}
+                        {{/if}}
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/searchVehicle")
+}

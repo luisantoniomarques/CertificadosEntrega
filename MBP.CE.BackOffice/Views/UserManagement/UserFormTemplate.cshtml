@@ -1,0 +1,71 @@
+﻿@model UserViewModel
+
+@{
+TempData["UserProfiles"] = Model.ProfilesList;
+TempData.Keep("UserProfiles");
+
+TempData["UserOutlets"] = Model.OutletsList;
+TempData.Keep("UserOutlets");
+}
+
+@if (Model.ProfilesList == null || !Model.ProfilesList.Any())
+{
+    <p>Não existem perfis (tbRoles) configurados!</p>
+    return;
+}
+
+@if (Model.OutletsList == null || !Model.OutletsList.Any())
+{
+    <p>Não é possível mostrar a página, porque a lista de concessionários está vazia!</p>
+    return;
+}
+
+@Html.Hidden("currentUsername", Model.Username)
+
+<table>
+    <tr>
+        <td style="width:110px;">@Html.LabelFor(m => m.IsActive)</td>
+        <td>@Html.CheckBoxFor(m => m.IsActive)</td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.Email)</td>    
+        <td>@Html.TextBoxFor(m => m.Email, new { style = "width:250px" })</td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.Username)</td>
+        <td>@Html.TextBoxFor(m => m.Username)</td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.Profile)</td>
+        <td>@Html.DropDownListFor(m => m.Profile, Model.ProfilesList)</td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.OutletsList)</td>
+        <td>
+            @Html.DropDownList("concession", Model.ConcessionList, new { style = "width:350px;" })
+            @Html.ListBoxFor(m => m.Outlets, Model.OutletsList, new {style = "width:350px; height:150px;"})
+        </td>
+        <td><div id="selectedOutlets" style="width: 350px; height: 150px; margin-left: 15px; overflow: auto;"></div></td>
+    </tr>
+    <tr>
+        <td>@Html.CheckBoxFor(m => m.CanViewNewCertificate) @Html.LabelFor(m => m.CanViewNewCertificate)</td>
+    </tr>
+    <tr>
+        <td>@Html.CheckBoxFor(m => m.CanViewStarSelectionCertificate) @Html.LabelFor(m => m.CanViewStarSelectionCertificate)</td>
+    </tr>
+    <tr>
+        <td>@Html.CheckBoxFor(m => m.CanViewUsedCertificate) @Html.LabelFor(m => m.CanViewUsedCertificate)</td>
+    </tr>
+    <tr>
+        <td>@Html.CheckBoxFor(m => m.CanViewUsed1Certificate) @Html.LabelFor(m => m.CanViewUsed1Certificate)</td>
+    </tr>
+</table>
+
+<script id="selected-outlets-template" type="text/x-handlebars-template">
+    <p>Outlets seleccionados:</p>
+    {{#each this}}
+        <label>{{text}} ({{value}})</label><br/>
+    {{/each}}
+</script>
+
+    

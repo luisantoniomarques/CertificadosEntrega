@@ -1,0 +1,104 @@
+﻿@using System.Globalization
+@{
+    var code = TempData["code"] as string;
+    var message = TempData["message"] as string;
+
+    var style = "panel-" + (code == "OK" ? "success" : "danger");
+}
+
+@if (!string.IsNullOrEmpty(message))
+{
+    <div class="panel @style">
+        <div class="panel-heading">Result</div>
+        <div class="panel-body">
+            @message
+        </div>
+    </div>
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">Vehicle Info</div>
+    <div class="panel-body">
+        <form action="/Test/VehicleInfo" method="post">
+            <div class="row">
+                <div class="col-md-2"><label>Certificate Number: </label></div>
+                <div class="col-md-2">@Html.TextBox("certificateNumber", "189141")</div>
+            </div>
+            <input type="submit"/>
+        </form>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Observation</div>
+    <div class="panel-body">
+        <form action="/Test/Observation" method="post">
+            <div class="row">
+                <div class="col-md-2"><label>Certificate Number: </label></div>
+                <div class="col-md-2">@Html.TextBox("certificateNumber", "189141")</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2"><label>Message: </label></div>
+                <div class="col-md-2">@Html.TextBox("message", "Observação teste...")</div>
+            </div>
+            
+            <input type="submit"/>
+        </form>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Scanning Data</div>
+    <div class="panel-body">
+        <form action="/Test/ScanningInfo" method="post">
+            <div class="row">
+                <div class="col-md-2"><label>Certificate Number: </label></div>
+                <div class="col-md-2">@Html.TextBox("certificateNumber", "189141")</div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-2"><label>Daimler: </label></div>
+                <div class="col-md-2">@Html.CheckBox("daimler")</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2"><label>Daimler MBR: </label>
+                </div>
+                <div class="col-md-2">@Html.CheckBox("daimlermbr")</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2"><label>AS Daimler: </label></div>
+                <div class="col-md-2">@Html.CheckBox("asdaimler")</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2"><label>AS Daimler MBR: </label></div>
+                <div class="col-md-2">@Html.CheckBox("asdaimlermbr")</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2"><label>PDF Link: </label></div>
+                <div class="col-md-2">@Html.TextBox("pdflink", "www.google.com")</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2"><label>User: </label></div>
+                <div class="col-md-2">@Html.TextBox("user", "PEDLUIS")</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2"><label>Date: </label></div>
+                <div class="col-md-2">@Html.TextBox("date", DateTime.Now.ToString(CultureInfo.GetCultureInfo("pt-PT")))</div>
+            </div>
+
+            <input type="submit"/>
+        </form>
+    </div>
+</div>
+
+
+
+
+<div></div>

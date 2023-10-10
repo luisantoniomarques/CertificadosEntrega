@@ -1,0 +1,55 @@
+﻿@model LoginModel
+@{
+    ViewBag.Title = @Resources.Login;
+}
+
+@{
+    if (!string.IsNullOrEmpty(Request.ServerVariables["HTTP_SM_USER"]))
+    {
+        <h3>A sua conta não está activa...</h3>
+        <p>Para activar a sua conta envie um email para <a href="mailto:help_mbpam@daimler.com">help_mbpam@daimler.com</a> e forneça os seguintes dados:</p>
+        <ul>
+            <li>Nome de utilzador (extranet);</li>
+            <li>Pontos de venda a que tem acesso;</li>
+            <li>Indicação se vende novos, usados e/ou StarSelection</li>
+        </ul>
+
+        <p>Obrigado</p>
+        return;
+    }
+}
+
+<div class="col-sm-12">
+    <div class="text-center">
+        <div class="page-title clearfix">
+            <div class="col-sm-12">
+                <h1>@Resources.Login</h1>
+            </div>
+        </div>
+
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "center-block text-left" }))
+        {
+            @Html.AntiForgeryToken()
+
+            if (ViewData.ModelState.Where(v => string.IsNullOrEmpty(v.Key)).Any(v => v.Value.Errors.Any()))
+            {
+                @Html.ValidationSummary(true, "", new { @class = "" })
+            }
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.UserName)
+                @Html.ValidationMessageFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName, new { @class = "width_100p" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password, new { @class = "width_100p" })
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-lg">@Resources.SignIn</button>
+                @Html.ActionLink(@Resources.ForgotPassword, "ForgotPassword", "Account", new { @class = "url_whitebg pull-right" })
+            </div>
+        }
+    </div>
+</div>

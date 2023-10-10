@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Submeter pedido";
+}
+
+<div id="partialView">
+    <div class="page-title clearfix">
+        <div class="col-sm-12">
+            <h1>@Resources.ApplicationName &ndash; @Resources.CorrectionRequests</h1>
+        </div>
+    </div>
+    <div class="body-content">
+        <div class="col-sm-12">
+            @Html.Partial("../Vehicle/CompleteDetails")
+
+            <div data-existspendingcorrection="false">
+                <div class="panel-heading"><i class="fa fa-comment-alt"></i> @Resources.Remarks</div>
+                <div class="panel panel-default">
+                    <div class="panel-body filters-panel">
+                        <form id="form-correction-request">
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-8">
+                                    <label for="remarks" class="col-sm-12 col-md-2 text-nowrap required">@Resources.Remarks</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <textarea class="width_100p" rows="3" id="remarks" name="remarks" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-xs-12 nopad">
+                <div style="margin-top: 10px; display: none;" class="alert alert-warning" role="alert" data-existspendingcorrection="true">@Resources.PendingCorrectionRequestExists</div>
+                <div id="panel-corrections-results" data-existspendingcorrection="true" class="nopad"></div>
+            </div>
+
+            <div class="col-sm-12 btn-action-group nopad margin-bottom-15 margin-top-10">
+                <div class="hidden-xs hidden-sm text-center">
+                    <button type="button" class="btn btn-default float-left btn-goback"><i class="glyphicon glyphicon-share-alt" style="padding-right: 3px; -webkit-transform: rotate(180deg); -moz-transform: rotate(180deg); -ms-transform: rotate(180deg); -o-transform: rotate(180deg); transform: rotate(180deg);"></i> @Resources.GoBack</button>
+                    <button type="button" class="btn btn-primary float-right btn-next" data-existspendingcorrection="false">@Resources.RequestDataClean</button>
+                </div>
+                <div class="hidden-md hidden-lg text-center">
+                    <button type="button" class="btn btn-default float-left btn-goback"><i class="glyphicon glyphicon-share-alt" style="padding-right: 3px; -webkit-transform: rotate(180deg); -moz-transform: rotate(180deg); -ms-transform: rotate(180deg); -o-transform: rotate(180deg); transform: rotate(180deg);"></i> @Resources.GoBack</button>
+                    <button type="button" class="btn btn-primary float-right btn-next" data-existspendingcorrection="false">@Resources.RequestDataClean</button>
+                </div>
+            </div>
+
+        </div>                    </div>
+
+        @section scripts {
+            @Scripts.Render("~/bundles/newCorrectionRequest")
+        }

@@ -1,0 +1,44 @@
+﻿<div id="partialView">
+    <div class="page-title clearfix">
+        <div class="col-sm-12">
+            <h1>@Resources.ApplicationName &ndash; @Resources.Management</h1>
+        </div>
+    </div>
+    <div class="body-content">
+        <div class="col-sm-12">
+            <div class="panel-heading"><i class="fa fa-building"></i> @Resources.GeneralInfo &ndash; @Resources.Enterprise</div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        @Html.Partial("Nif")
+                    </div>
+
+                    <div class="row margin-top-15">
+                        <div class="col-xs-6 col-sm-12 col-lg-6">
+                            <label for="cae" class="col-sm-4">@Resources.CAE</label>
+                            <div class="col-sm-8">
+                                @Helpers.BootstrapDropdown("cae", false, true)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-12 col-lg-6">
+                            <label for="shortname" class="col-sm-4">@Resources.ShortName</label>
+                            <div class="col-sm-8">
+                                <input maxlength="100" type="text" class="width_100p" id="shortname" name="shortname">
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-12 col-lg-6">
+                            <label for="companyname" class="col-sm-4">@Resources.CompanyName</label>
+                            <div class="col-sm-8">
+                                <input maxlength="150" type="text" class="width_100p" id="companyname" name="companyname" required aria-required="true">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

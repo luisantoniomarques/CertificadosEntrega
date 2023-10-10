@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "New Certificate - Step 1";
+}
+<div id="step1" class="tab-pane fade in active" style="padding: 0 !important">
+    <div class="panel-heading margin-top-15"><i class="fa fa-user"></i> @Resources.OwnerType</div>
+    <form id="form-new-cert-step1">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group" id="deliveryTypesList">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 btn-action-group nopad margin-bottom-15 margin-top-10">
+            <div class="hidden-xs hidden-sm text-center">
+                <button type="button" class="btn btn-default float-left btn-goback"><i class="glyphicon glyphicon-share-alt" style="padding-right: 3px; -webkit-transform: rotate(180deg); -moz-transform: rotate(180deg); -ms-transform: rotate(180deg); -o-transform: rotate(180deg); transform: rotate(180deg);"></i> @Resources.GoBack</button>
+                <button type="button" class="btn btn-default btn-clear">@Resources.Clear</button>
+                <button type="button" class="btn btn-primary float-right btn-next">@Resources.Continue</button>
+            </div>
+            <div class="hidden-md hidden-lg text-center">
+                <button type="button" class="btn btn-default float-left btn-goback"><i class="glyphicon glyphicon-share-alt" style="padding-right: 3px; -webkit-transform: rotate(180deg); -moz-transform: rotate(180deg); -ms-transform: rotate(180deg); -o-transform: rotate(180deg); transform: rotate(180deg);"></i> @Resources.GoBack</button>
+                <button type="button" class="btn btn-default btn-clear">@Resources.Clear</button>
+                <button type="button" class="btn btn-primary float-right btn-next">@Resources.Continue</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script id="delivery-type-template" type="text/x-handlebars-template">
+    {{#if Owner}}
+        <div class="col-xs-12 col-md-6 margin-bottom-15">
+            <div class="panel-subheading">Proprietário</div>
+            <ul class="list-unstyled">
+                {{#each Owner}}
+                {{> delivery-type}}
+                {{/each}}
+            </ul>
+        </div>
+    {{/if}}
+
+    {{#if Renting}}
+        <div class="col-xs-12 col-md-6">
+            <div class="panel-subheading">[ELR] Empresa de Leasing / Renting</div>
+            <div class="panel-subheading">Cliente Final</div>
+            <ul class="list-unstyled">
+                {{#each Renting}}
+                {{> delivery-type}}
+                {{/each}}
+            </ul>
+        </div>
+    {{/if}}
+</script>
+
+<script id="delivery-type-partial" type="text/x-handlebars-template">
+    {{#if Checked}}
+    <li><input id="{{Value}}" type="radio" value="{{Value}}" name="deliveryType" required checked><label for="{{Value}}">{{Description}}</label></li>
+    {{else}}
+    <li><input id="{{Value}}" type="radio" value="{{Value}}" name="deliveryType" required><label for="{{Value}}">{{Description}}</label for="{{Value}}"></li>
+    {{/if}}
+</script>

@@ -1,0 +1,15 @@
+﻿<div class="col-xs-6 col-sm-12 col-lg-6">
+    <label for="nif" class="col-sm-2 required">@Resources.NIPC</label>
+    <div class="col-sm-5" id="nif-input-group">
+        <input maxlength="20" type="text" id="nif" name="nif" required aria-required="true">
+    </div>
+    <div class="col-sm-5">
+        @Helpers.BootstrapDropdown("nifCountry", false, true)
+    </div>
+</div>
+<div class="col-xs-6 col-sm-12 col-lg-6" id="nif-validation-result"></div>
+
+<script id="nif-validation-template" type="text/x-handlebars-template">
+    <span class="glyphicon {{#if isValid}} glyphicon-ok text-success {{else}} glyphicon-remove text-danger {{/if}}" aria-hidden="false"></span>
+    {{message}}
+</script>

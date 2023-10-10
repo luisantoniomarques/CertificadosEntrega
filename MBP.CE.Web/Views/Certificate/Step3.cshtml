@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "New Certificate - Step 3";
+}
+
+@{
+    //welber - 24/10/2019 - Data da Campanha certificado 4 anos
+    var myDate = ViewBag.MaxDateCampaign;
+
+}
+
+@Html.Partial("../Vehicle/CompleteDetails")
+
+@*//welber - 24/10/2019 - Data da Campanha certificado 4 anos*@
+<input type="hidden" id="MaxDate" name="MaxDate" value="@ViewBag.MaxDateCampaign" />
+
+<div class="panel panel-default" id="panel-warning-license">
+    <div class="alert alert-warning" role="alert" style="margin: 0;">
+        <strong>@Resources.Warning!</strong>&nbsp;
+        <span>@Resources.WarningNoLicense</span>
+    </div>
+</div>
+
+<div class="panel-heading margin-top-15"><i class="fa fa-check-square"></i> Confirmar dados</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row nopad">
+            <div class="col-sm-12">
+                <div id="confirmInfo"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="panel-control-step3" class="panel-body nopad">
+    <div class="col-sm-12 btn-action-group nopad margin-bottom-15 margin-top-10">
+        <div class="hidden-xs hidden-sm text-center">
+            <button type="button" class="btn btn-default float-left btn-goback">@Resources.Previous</button>
+            <button type="button" class="btn btn-default btn-clear">@Resources.Clear</button>
+            <button type="button" class="btn btn-primary float-right btn-next"><i class="glyphicon glyphicon-floppy-disk"></i> @Resources.Save</button>
+        </div>
+        <div class="hidden-md hidden-lg text-center">
+            <button type="button" class="btn btn-default float-left btn-goback">@Resources.Previous</button>
+            <button type="button" class="btn btn-default btn-clear">@Resources.Clear</button>
+            <button type="button" class="btn btn-primary float-right btn-next"><i class="glyphicon glyphicon-floppy-disk"></i> @Resources.Save</button>
+        </div>
+    </div>
+</div>
+
+<script id="vehicle-confirm-template" type="text/x-handlebars-template">
+    @Resources.ConfirmVehicleInfo
+</script>
+

@@ -1,0 +1,20 @@
+﻿@model UserViewModel
+
+<h1>Novo utilizador</h1>
+
+@using (Html.BeginForm("Create", "UserManagement", FormMethod.Post))
+{
+    @Html.ValidationSummary()
+
+    @Html.Partial("UserFormTemplate", Model)
+    
+    @Html.CheckBox("notifyUser", false) <label>Notificar utilizador por email</label>
+
+    <br/>
+    <input type="submit" value="Criar novo utilizador" />
+    @Html.ActionLink("Voltar", "Index", "UserManagement", new { style = "margin-left: 10px;" })
+}
+
+@section scripts {
+    <script src="~/Scripts/UserManagement/userManagement.js"></script>
+}

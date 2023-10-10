@@ -1,0 +1,96 @@
+﻿{
+    "certificate": {
+        
+        "deliveryType": {
+            "WithoutLicense": "Sem matrícula",
+            "DE": "[DE] Demonstração",
+            "SE": "[SE] Serviço",
+            "PP": "[PP] Particular - Uso Próprio",
+            "PT": "[PT] Particular - Uso de Terceiros",
+            "PF": "[PF] Particular - Financiamento",
+            "E": "[E] Empresa",
+            "ELR_PP": "[ELR-PP] Particular - Uso Próprio",
+            "ELR_PT": "[ELR-PT] Particular - Uso de Terceiros",
+            "ELR_E": "[ELR-E] Empresa"
+        },
+
+        "action": {
+            "view": "Visualizar",
+            "correct": "Corrigir",
+            "issue": "Emitir",
+            "reassign": "Ceder",
+            "continue": "Continuar",
+            "edit": "Editar",
+            "close": "Terminar"
+        },
+
+        "status": {
+            "archived": "Arquivado",
+            "available": "Disponível",
+            "assigned": "Atribuído",
+            "delivered": "Entregue",
+            "closed": "Terminado"
+        },
+
+        "atLeastOneContact": "Selecione, pelo menos, um telefone e um email."
+
+    },
+
+    "correctionRequest": {
+        "status": {
+            "pending": "Pendente",
+            "rejected": "Rejeitado",
+            "processed": "Processado"
+        },
+
+        "type": {
+            "dataClean": "Limpeza de dados"
+        }
+    },
+
+    "entity": {
+        "removeAddress": "Tem a certeza que pretende remover a morada seleccionada?",
+        "removeContact": "Tem a certeza que pretende remover o contacto seleccionado?",
+        "atLeastOneContact": "Insira, pelo menos, um telefone e um email.",
+        "duplicatedTin": "NIF já existe",
+        "invalidTin": "NIF inválido"
+    },
+
+    "vehicle": {
+        "financingPeriod": {
+            "12months": "12 Meses",
+            "24months": "24 Meses",
+            "36months": "36 Meses",
+            "48months": "48 Meses",
+            "60months": "60 Meses",
+            "72months": "72 Meses",
+            "84months": "84 Meses",
+            "96months": "96 Meses",
+            "unknown": "Desconhecido"
+        },
+
+        "invalidBaumuster": "Baumuster inválido.",
+        "invalidStarSelectionMileage": "Quilometragem StarSelection inválida.",
+        "invalidStarSelectionDate": "Data StarSelection inválida.",
+
+        "type": {
+            "new": "Nova",
+            "starSelection": "StarSelection"
+        }
+    },
+
+    "jQuery": {
+        "validator": {
+            "required": "Campo de preenchimento obrigatório.",
+            "email": "Indique um email válido.",
+            "url": "Indique um URL válido.",
+            "date": "Formato de data inválido.",
+            "dateISO": "Formato de data inválido (ISO).",
+            "number": "Valor não numérico.",
+            "digits": "Introduza apenas números.",
+            "daymonthyearfour": "Indique a data no formato dd-mm-aaaa.",
+            "greaterThanZero": "Valor tem que ser superior a zero",
+            "invalidValue": "Valor inválido"
+        }
+    }
+}

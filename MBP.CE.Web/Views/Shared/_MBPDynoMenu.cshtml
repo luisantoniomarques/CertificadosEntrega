@@ -1,0 +1,362 @@
+﻿@model MBP.CE.Web.Models.PortalActions.ModelList
+@using System.Configuration
+@using MBP.CE.Web.Helpers
+
+<!---Main Menu--->
+<div class="col-sm-4 col-md-3 col-lg-2 mmenu" id="mmenu">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse sidebar-navbar-collapse" id="menu_items">
+        <ul class="nav navbar-nav">
+            <li>
+                <a id="hamburguer" class="navicon-button open hidden-xs hidden-sm" title="@Resources.MenuToggle">
+                    <img src="~/Content/icons/bars.png" alt="icon-menu" />
+                    <span class="side-menu-titles menu-title">Menu</span>
+                </a>
+
+                <div id="accordion">
+                    @foreach (var appmod in @Model.ItemList)
+                    {
+                        string appID = appmod.application.applicationID.ToString();
+
+                        string appName = appmod.application.ApplicationName;
+                        string menuAppID = "menuApp" + appID;
+                        string iconURL = appmod.application.iconUrl;
+
+                        <div class="panel panel-transparent">
+                            <div class="panel-heading cursor-pointer">
+                                <div class="panel-title" data-toggle="collapse" data-parent="#accordion" data-target="#@(menuAppID)" aria-expanded="false" aria-controls="@(menuAppID)">
+                                    <i class="menu-icon fa fa-fw fa-@(iconURL)"></i> <span class="side-menu-titles">@appName</span>
+                                </div>
+                            </div>
+                            <div class="collapse menucfleet" id="@(menuAppID)">
+                                <ul class="submenu">
+                                    @{
+                                        var ModulesCount = appmod.modules.Count;
+                                    }
+                                    @foreach (var mod in appmod.modules)
+                                    {
+                                        var URLSplited = mod.URL.Split('/');
+                                        var LiTagId = string.Empty;
+                                        if (URLSplited.Length > 2)
+                                        {
+                                            LiTagId = URLSplited[1] + "-" + URLSplited.Last();
+                                        }
+                                        else
+                                        {
+                                            LiTagId = URLSplited[1] + "-" + ViewBag.Action;
+                                        }
+                                        <li id="@(LiTagId.ToLower().ToString())">
+                                            @if (mod.ModuleID != int.Parse(ConfigurationManager.AppSettings["SsmModuleId"]) && mod.ModuleID != int.Parse(ConfigurationManager.AppSettings["SsmHistoryModuleId"]) && mod.ModuleID != int.Parse(ConfigurationManager.AppSettings["SsmAssignModuleId"]))
+                                            {
+                                                if (string.IsNullOrWhiteSpace(mod.controllerName))
+                                                {
+                                                    <a href="@PortalActionsHelper.GetModuleUrl(mod.ModuleName, appID, User.Identity.Name)" target="_blank"><i class="menu-icon fa fa-fw fa-@(mod.iconUrl)"></i> <span>@(mod.ModuleName)</span></a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="@PortalActionsHelper.GetModuleUrl(mod.ModuleName, appID, User.Identity.Name)"><i class="menu-icon fa fa-fw fa-@(mod.iconUrl)"></i> <span>@(mod.ModuleName)</span></a>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <a onclick="return false"><i class="menu-icon fa fa-fw fa-@(mod.iconUrl)"></i> <span>@(mod.ModuleName)</span></a>
+                                            }
+                                        </li>
+
+                                        if (mod.ModuleID == int.Parse(ConfigurationManager.AppSettings["SsmModuleId"]) || mod.ModuleID == int.Parse(ConfigurationManager.AppSettings["SsmHistoryModuleId"]) || mod.ModuleID == int.Parse(ConfigurationManager.AppSettings["SsmAssignModuleId"]))
+                                        {
+                                            @Html.Hidden("ModuleUrl", @PortalActionsHelper.GetModuleUrl(mod.ModuleName, appID, User.Identity.Name))
+
+                                            <li>
+                                                <ul class="list">
+                                                    <li>
+                                                        <a>@DateTime.Now.AddYears(-1).ToString("yyyy")</a> @*Valor tem que ser dinamico - *@
+                                                        @if (mod.ModuleID == int.Parse(ConfigurationManager.AppSettings["SsmModuleId"]))
+                                                        {
+                                                            <ul class="listMonthsPassed monthlist" style="display: none"></ul>
+                                                        }
+                                                        @if (mod.ModuleID == int.Parse(ConfigurationManager.AppSettings["SsmAssignModuleId"]))
+                                                        {
+                                                            <ul class="listMonthsPassedAssign monthlist" style="display: none"></ul>
+                                                        }
+                                                        @if (mod.ModuleID == int.Parse(ConfigurationManager.AppSettings["SsmHistoryModuleId"]))
+                                                        {
+                                                            <ul class="listMonthsPassedHistory monthlist" style="display: none"></ul>
+                                                        }
+                                                    </li>
+                                                </ul>
+                                            </li>
+
+                                            <li>
+                                                <ul class="list">
+                                                    <li>
+                                                        <a>@DateTime.Now.ToString("yyyy")</a>
+                                                        @if (mod.ModuleID == int.Parse(ConfigurationManager.AppSettings["SsmModuleId"]))
+                                                        {
+                                                            <ul class="listMonths monthlist" style="display: none"></ul>
+                                                        }
+                                                        @if (mod.ModuleID == int.Parse(ConfigurationManager.AppSettings["SsmAssignModuleId"]))
+                                                        {
+                                                            <ul class="listMonthsAssign monthlist" style="display: none"></ul>
+                                                        }
+                                                        @if (mod.ModuleID == int.Parse(ConfigurationManager.AppSettings["SsmHistoryModuleId"]))
+                                                        {
+                                                            <ul class="listMonthsHistory monthlist" style="display: none"></ul>
+                                                        }
+
+                                                    </li>
+                                                </ul>
+                                            </li>
+
+                                            if (DateTime.Now.Year < DateTime.Now.AddMonths(2).Year)
+                                            {
+                                                <li>
+                                                    <ul class="list">
+                                                        <li>
+                                                            <a>@DateTime.Now.AddYears(1).ToString("yyyy")</a>
+                                                            @if (mod.ModuleID == int.Parse(ConfigurationManager.AppSettings["SsmModuleId"]))
+                                                            {
+                                                                <ul class="listMonthsFuture monthlist" style="display: none"></ul>
+                                                            }
+                                                            @if (mod.ModuleID == int.Parse(ConfigurationManager.AppSettings["SsmAssignModuleId"]))
+                                                            {
+                                                                <ul class="listMonthsFutureAssign monthlist" style="display: none"></ul>
+                                                            }
+                                                            @if (mod.ModuleID == int.Parse(ConfigurationManager.AppSettings["SsmHistoryModuleId"]))
+                                                            {
+                                                                <ul class="listMonthsFutureHistory monthlist" style="display: none"></ul>
+                                                            }
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            }
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+	    $("#hamburguer").click(function (e) {
+	        e.stopPropagation();
+	        e.preventDefault();
+
+	        $("#mmenu").toggleClass("menu-hidden", 300);
+
+	        if ($(".side-menu-titles").is(":visible")) {
+	            $(".side-menu-titles").toggleClass("hide");
+	            $("#mmenu .in").toggleClass("hide");
+	            $(".mcontent").toggleClass("container-expanded", 300);
+	        }
+	        else {
+	            $(".side-menu-titles").toggleClass("hide", 310);
+	            $("#mmenu .in").toggleClass("hide", 310);
+	            $(".mcontent").toggleClass("container-expanded", 300);
+
+	        }
+
+	    });
+
+	    $("#accordion .panel-transparent").click(function () {
+
+	        if ($("#mmenu").hasClass("menu-hidden")) {
+	            $("#mmenu").toggleClass("menu-hidden", 300);
+	            $(".side-menu-titles").toggleClass("hide", 310);
+	            $(".mcontent").toggleClass("container-expanded", 300);
+	            $("#mmenu .in").toggleClass("hide", 310);
+	            $(".collapse").css("transition-delay", "1s");
+	        }
+	        else {
+	            $(".collapse").css("transition-delay", "");
+	        }
+	        if ($(this).children(".collapse").hasClass("in")) {
+	            $("#mmenu .in").addClass("in", 310);
+	        }
+	    });
+
+	    $("#hamburguersm").click(function (e) {
+	        e.preventDefault();
+	        $("#mmenu").toggleClass("mmenu", 200);
+	    });
+
+	    @*$('.menucfleet li').each(function (i, val) {
+	        var controller = "@ViewBag.Controller.ToString().ToLower()"+"-"+i;
+	        var currentCat = $("#" + controller);
+	        $(currentCat).closest(".collapse").addClass("in");
+	        $(currentCat).addClass("active");
+	    })*@
+        var controller = "@ViewBag.Controller.ToString().ToLower()"+"-"+"@ViewBag.Action.ToString().ToLower()";
+        var currentCat = $("#" + controller);
+
+        $(currentCat).closest(".collapse").addClass("in");
+        $(currentCat).addClass("active");
+
+	    $('.list > li a').click(function () {
+
+            var clicked = $(this).parent().children(".monthlist");
+
+            clicked.slideToggle("fast");
+            $(".monthlist:visible").not(clicked).slideToggle("medium");
+
+            $(this).toggleClass("active-sub");
+            $(".list > li a").not($(this)).removeClass("active-sub");
+
+	    });
+
+	    moment.locale("pt");
+	    var months = moment.months();
+	    var currentMonth = moment().month();
+	    if (currentMonth >= 10) {
+	        var futureMonthNewYear = currentMonth + 2;
+	    }
+	    var lastYear = moment().subtract(1, 'year').format('YYYY');
+	    var thisYear = moment().format('YYYY');
+	    var nextYear = moment().add(1, 'year').format('YYYY');
+
+	    var cListpast = $('ul.listMonthsPassed');
+	    var cListpastAssign = $('ul.listMonthsPassedAssign');
+	    var cListpastHistory = $('ul.listMonthsPassedHistory');
+
+	    var cList = $('ul.listMonths');
+	    var cListAssign = $('ul.listMonthsAssign');
+	    var cListHistory = $('ul.listMonthsHistory');
+
+	    var cListfuture = $('ul.listMonthsFuture');
+	    var cListfutureAssign = $('ul.listMonthsFutureAssign');
+	    var cListfutureHistory = $('ul.listMonthsFutureHistory');
+
+	    $.each(months, function (i) {
+	        var li = $('<li/>')
+	            .addClass('ui-menu-item')
+	            .attr('role', 'menuitem')
+	            .appendTo(cListpast);
+	        $('<span/>')
+	            .addClass('ui-all')
+	            @*.append("<a href='" + '@ConfigurationManager.AppSettings["BaseUrlAppLeads"]' + '@CultureHelper.GetCurrentCulture()/' + 'OpportunitySSM/SSM' + "?year=" + lastYear + "&month=" + (i + 1) + "'>" + months[i] + "</a>")*@
+                .append("<a href='" + '@ConfigurationManager.AppSettings["BaseUrlAppLeads"]' + '@CultureHelper.GetCurrentCulture()/' + 'Home/Index' + "?year=" + lastYear + "&month=" + (i + 1) + "'>" + months[i] + "</a>")
+	            .appendTo(li);
+	    });
+
+	    $.each(months, function (i) {
+	        var li = $('<li/>')
+	            .addClass('ui-menu-item')
+	            .attr('role', 'menuitem')
+	            .appendTo(cListpastAssign);
+	        $('<span/>')
+	            .addClass('ui-all')
+	            .append("<a href='" + '@ConfigurationManager.AppSettings["BaseUrlAppLeads"]' + '@CultureHelper.GetCurrentCulture()/' + 'OpportunitySSM/SSM' + "?year=" + lastYear + "&month=" + (i + 1) + "'>" + months[i] + "</a>")
+	            .appendTo(li);
+	    });
+
+	    $.each(months, function (i) {
+	        var li = $('<li/>')
+	            .addClass('ui-menu-item')
+	            .attr('role', 'menuitem')
+	            .appendTo(cListpastHistory);
+	        $('<span/>')
+	            .addClass('ui-all')
+	            .append("<a href='" + '@ConfigurationManager.AppSettings["BaseUrlAppLeads"]' + '@CultureHelper.GetCurrentCulture()/' + 'OpportunitySSM/SSM' + "?year=" + lastYear + "&month=" + (i + 1) + "'>" + months[i] + "</a>")
+	            .appendTo(li);
+	    });
+
+	    $.each(months, function (i) {
+	        if (i <= currentMonth + 2) {
+	            var li = $('<li/>')
+	                .addClass('ui-menu-item')
+	                .attr('role', 'menuitem')
+	                .appendTo(cList);
+	            $('<span/>')
+	                .addClass('ui-all')
+	                .append("<a href='" + '@ConfigurationManager.AppSettings["BaseUrlAppLeads"]' + '@CultureHelper.GetCurrentCulture()/' + 'OpportunitySSM/SSM' + "?year=" + thisYear + "&month=" + (i + 1) + "'>" + months[i] + "</a>")
+	                .appendTo(li);
+	        }
+	    });
+
+	    $.each(months, function (i) {
+	        if (i <= currentMonth + 2) {
+	            var li = $('<li/>')
+	                .addClass('ui-menu-item')
+	                .attr('role', 'menuitem')
+	                .appendTo(cListAssign);
+	            $('<span/>')
+	                .addClass('ui-all')
+	                .append("<a href='" + '@ConfigurationManager.AppSettings["BaseUrlAppLeads"]' + '@CultureHelper.GetCurrentCulture()/' + 'OpportunitySSM/SSM' + "?year=" + thisYear + "&month=" + (i + 1) + "'>" + months[i] + "</a>")
+	                .appendTo(li);
+	        }
+	    });
+
+	    $.each(months, function (i) {
+	        if (i <= currentMonth + 2) {
+	            var li = $('<li/>')
+	                .addClass('ui-menu-item')
+	                .attr('role', 'menuitem')
+	                .appendTo(cListHistory);
+	            $('<span/>')
+	                .addClass('ui-all')
+	                .append("<a href='" + '@ConfigurationManager.AppSettings["BaseUrlAppLeads"]' + '@CultureHelper.GetCurrentCulture()/' + 'OpportunitySSM/SSM' + "?year=" + thisYear + "&month=" + (i + 1) + "'>" + months[i] + "</a>")
+	                .appendTo(li);
+	        }
+	    });
+
+	    if (cListfuture[0] != undefined) {
+	        debugger;
+	        $.each(months, function (i) {
+	            if (futureMonthNewYear != undefined && futureMonthNewYear > 11) {
+	                if (i < (futureMonthNewYear - 11)) {
+	                    var li = $('<li/>')
+	                        .addClass('ui-menu-item')
+	                        .attr('role', 'menuitem')
+	                        .appendTo(cListfuture);
+	                    $('<span/>')
+	                        .addClass('ui-all')
+	                        .append("<a href='" +'@ConfigurationManager.AppSettings["BaseUrlAppLeads"]' + '@CultureHelper.GetCurrentCulture()/' + 'OpportunitySSM/SSM' + "?year=" + nextYear + "&month=" + (i + 1) + "'>" + months[i] + "</a>")
+	                        .appendTo(li);
+	                }
+	            }
+	        });
+	    }
+
+	    if (cListfuture[0] != undefined) {
+	        debugger;
+	        $.each(months, function (i) {
+	            if (futureMonthNewYear != undefined && futureMonthNewYear > 11) {
+	                if (i < (futureMonthNewYear - 11)) {
+	                    var li = $('<li/>')
+	                        .addClass('ui-menu-item')
+	                        .attr('role', 'menuitem')
+	                        .appendTo(cListfutureAssign);
+	                    $('<span/>')
+	                        .addClass('ui-all')
+	                        .append("<a href='" + '@ConfigurationManager.AppSettings["BaseUrlAppLeads"]' + '@CultureHelper.GetCurrentCulture()/' + 'OpportunitySSM/Assign' + "?year=" + nextYear + "&month=" + (i + 1) + "'>" + months[i] + "</a>")
+	                        .appendTo(li);
+	                }
+	            }
+	        });
+	    }
+
+	    if (cListfuture[0] != undefined) {
+	        debugger;
+	        $.each(months, function (i) {
+	            if (futureMonthNewYear != undefined && futureMonthNewYear > 11) {
+	                if (i < (futureMonthNewYear - 11)) {
+	                    var li = $('<li/>')
+	                        .addClass('ui-menu-item')
+	                        .attr('role', 'menuitem')
+	                        .appendTo(cListfutureHistory);
+	                    $('<span/>')
+	                        .addClass('ui-all')
+	                        .append("<a href='" + '@ConfigurationManager.AppSettings["BaseUrlAppLeads"]' + '@CultureHelper.GetCurrentCulture()/'+ 'OpportunitySSM/History' + "?year=" + nextYear + "&month=" + (i + 1) + "'>" + months[i] + "</a>")
+	                        .appendTo(li);
+	                }
+	            }
+	        });
+	    }
+    });
+</script>
